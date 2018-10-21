@@ -1,10 +1,19 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+import MovieList from './components/movieList.jsx';
+import Nav from './components/nav.jsx';
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      movies: [
+      {title: 'Mean Girls'},
+      {title: 'Hackers'},
+      {title: 'The Grey'},
+      {title: 'Sunshine'},
+      {title: 'Ex Machina'}]
     };
 
   }
@@ -12,7 +21,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="main">
-      <h1>this works</h1>
+        <h1>App works</h1>
+        <div>
+          <Nav />
+        </div>
+        <div>
+          <MovieList movies={this.state.movies}/>
+        </div>
       </div>
     )
   }
