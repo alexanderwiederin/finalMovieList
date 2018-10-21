@@ -4,7 +4,7 @@ var MovieList = ({movies}) => {
   return (
     <div>
     {movies.map((movie) => {
-      return <div key={movie.title}>{movie.title}</div>
+      return movie.searched ? <div key={movie.title}>{movie.title}</div> : null;
     })}
     </div>
   );

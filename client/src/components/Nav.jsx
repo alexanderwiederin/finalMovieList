@@ -1,8 +1,8 @@
 var React = require('react');
 
 class Nav extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       searchMovie: '',
       addedMovie: ''
@@ -11,8 +11,9 @@ class Nav extends React.Component {
 
   handleInputChange(event) {
     var newState = {};
-    newState[event.target.id] = event.target.value;
-    console.log(newState);
+    var searchedMovie = event.target.value.toLowerCase();
+    newState[event.target.id] = searchMovie;
+    this.props.searchMovieList(searchedMovie);
     this.setState(newState);
   }
 
