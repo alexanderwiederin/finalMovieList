@@ -5,15 +5,20 @@ class Nav extends React.Component {
     super(props);
     this.state = {
       searchMovie: '',
-      addedMovie: ''
+      addMovie: ''
     }
   }
 
   handleInputChange(event) {
     var newState = {};
-    var searchedMovie = event.target.value.toLowerCase();
-    newState[event.target.id] = searchMovie;
-    this.props.searchMovieList(searchedMovie);
+    if(event.target.id === "searchMovie") {
+      var searchedMovie = event.target.value.toLowerCase();
+      newState[event.target.id] = searchedMovie;
+      this.props.searchMovieList(newState.searchMovie);
+    } else {
+      var addedMovie = event.target.value.toLowerCase();
+      newState[event.target.id] = addedMovie;
+    }
     this.setState(newState);
   }
 
@@ -21,6 +26,8 @@ class Nav extends React.Component {
     return (
       <div>
         <input id="searchMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
+        <input id="addMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
+        <button>addMovie</button>
       </div>
     )
   }
