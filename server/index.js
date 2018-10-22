@@ -10,10 +10,13 @@ console.log(path.join(__dirname, '../client/dist'));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+app.use(parseBody.json());
+
 app.get('/movies', (req, res) => {
   databaseMethods.getAll((error, results) => {
     if(error) {
       console.log(error);
+      res.status(500).send(error);
     } else {
       res.status(200).send(results);
     }

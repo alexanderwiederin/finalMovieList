@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var $ = require('jquery');
 
 import MovieList from './components/movieList.jsx';
 import Nav from './components/nav.jsx';
@@ -9,16 +10,37 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [
-      {title: 'Mean Girls', searched: true},
-      {title: 'Hackers', searched: true},
-      {title: 'The Grey', searched: true},
-      {title: 'Sunshine', searched: true},
-      {title: 'Ex Machina', searched: true}]
+      movies: []
     };
 
+    this.getMovies = this.getMovies.bind(this);
     this.searchMovieList = this.searchMovieList.bind(this);
+  
+  }
 
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  conformMovies(moviesArray) {
+    return moviesArray.map((movie) => {
+      movie.searched = true;
+      return movie;
+    })
+  }
+
+  getMovies() {
+    $.ajax({
+      url: '/movies',
+      method: 'GET',
+      success: (result) => {
+        var movies = this.conformMovies(result);
+        this.setState({movies});
+      },
+      error: (error) => {
+        console.log('error', error);
+      }
+    })
   }
 
   searchMovieList(searchValue) {
