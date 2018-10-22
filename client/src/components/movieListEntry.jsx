@@ -8,17 +8,22 @@ class MovieListEntry extends React.Component {
     }
   }
 
+  changeWatchStatus() {
+    var watched = !this.state.watched;
+    this.setState({watched})
+  }
+
   render() {
     if(!this.state.watched) {
       return (
         <div key={this.props.movie.id}>
-        <span>{this.props.movie.title}</span><button>To Watch</button>
+        <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>To Watch</button>
         </div> 
       )
     } else {
       return (
         <div key={this.props.movie.title}>
-        <span>{this.props.movie.title}</span><button>Watched</button>
+        <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>Watched</button>
         </div>
       )
     }
