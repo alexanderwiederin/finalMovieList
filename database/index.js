@@ -5,3 +5,6 @@ var dbConnection = mysql.createConnection({
   password: '',
   database: 'movieList'
 });
+
+dbConnection.connect();
+
