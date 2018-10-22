@@ -10,17 +10,24 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: []
+      movies: [],
+      watched: null
     };
 
     this.getMovies = this.getMovies.bind(this);
     this.searchMovieList = this.searchMovieList.bind(this);
     this.addMovie = this.addMovie.bind(this);
+    this.toggleWatchStatusSearch = this.toggleWatchStatusSearch.bind(this);
   
   }
 
   componentDidMount() {
     this.getMovies();
+  }
+
+  toggleWatchStatusSearch(status) {
+    var watched = status;
+    this.setState({watched})
   }
 
   conformMovies(moviesArray) {
@@ -71,10 +78,10 @@ class App extends React.Component {
       <div className="main">
         <h1>App works</h1>
         <div>
-          <Nav searchMovieList={this.searchMovieList} addMovie={this.addMovie}/>
+          <Nav searchMovieList={this.searchMovieList} addMovie={this.addMovie} toggleWatchStatusSearch={this.toggleWatchStatusSearch} />
         </div>
         <div>
-          <MovieList movies={this.state.movies}/>
+          <MovieList movies={this.state.movies} watchSearchStatus={this.state.watched}/>
         </div>
       </div>
     )

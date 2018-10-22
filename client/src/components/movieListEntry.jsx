@@ -14,20 +14,26 @@ class MovieListEntry extends React.Component {
   }
 
   render() {
-    if(!this.state.watched) {
-      return (
-        <div key={this.props.movie.id}>
-        <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>To Watch</button>
-        </div> 
-      )
+    if (this.props.watchSearchStatus === this.state.watched || this.props.watchSearchStatus === null) {
+      if (!this.state.watched) {
+        return (
+          <div key={this.props.movie.id}>
+          <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>To Watch</button>
+          </div> 
+        )
+      } else {
+        return (
+          <div key={this.props.movie.title}>
+          <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>Watched</button>
+          </div>
+        )
+      }
     } else {
       return (
-        <div key={this.props.movie.title}>
-        <span>{this.props.movie.title}</span><button onClick={this.changeWatchStatus.bind(this)}>Watched</button>
-        </div>
-      )
+        <div></div>
+        )
     }
-  }
+  }   
 }
 
 export default MovieListEntry;

@@ -5,7 +5,8 @@ class Nav extends React.Component {
     super(props);
     this.state = {
       searchMovie: '',
-      addMovie: ''
+      addMovie: '',
+      watched: null
     }
   }
 
@@ -26,12 +27,38 @@ class Nav extends React.Component {
     this.props.addMovie(this.state.addMovie);
   }
 
+  handleWatchStatusChange() {
+    if (this.state.watched) {
+      this.props.toggleWatchStatusSearch(null);
+      this.setState({watched: null});
+    } else {
+      this.props.toggleWatchStatusSearch(true);
+      this.setState({watched: true});
+    } 
+  }
+
+  handleToWatchStatusChange() {
+    if (this.state.watched || this.state.watched === null) {
+      this.props.toggleWatchStatusSearch(false);
+      this.setState({watched: false});
+    } else {
+      this.props.toggleWatchStatusSearch(null);
+      this.setState({watched: null});
+    } 
+  }
+
+
   render() {
     return (
       <div>
-        <input id="searchMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
-        <input id="addMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
-        <button onClick={this.handleSubmit.bind(this)}>addMovie</button>
+        <div>
+          <input id="searchMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
+          <input id="addMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
+          <button onClick={this.handleSubmit.bind(this)}>addMovie</button>
+        </div>
+        <div>
+        <button onClick={this.handleWatchStatusChange.bind(this)}>Watch</button><button onClick={this.handleToWatchStatusChange.bind(this)}>To Watch</button>
+        </div>
       </div>
     )
   }
