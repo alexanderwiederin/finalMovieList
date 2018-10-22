@@ -23,7 +23,7 @@ class Nav extends React.Component {
   }
 
   handleSubmit() {
-    console.log(this.state.addMovie);
+    this.props.addMovie(this.state.addMovie);
   }
 
   render() {

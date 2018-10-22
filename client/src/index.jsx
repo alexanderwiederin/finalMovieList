@@ -15,6 +15,7 @@ class App extends React.Component {
 
     this.getMovies = this.getMovies.bind(this);
     this.searchMovieList = this.searchMovieList.bind(this);
+    this.addMovie = this.addMovie.bind(this);
   
   }
 
@@ -43,6 +44,18 @@ class App extends React.Component {
     })
   }
 
+  addMovie(movieTitle) {
+    $.ajax({
+      url: '/addMovie',
+      method: 'POST',
+      contentType: 'text/plain',
+      data: movieTitle,
+      success: () => {
+        this.getMovies();
+      }
+    })
+  }
+
   searchMovieList(searchValue) {
     var movies = this.state.movies.slice();
     movies.map((movie) => {
@@ -58,7 +71,7 @@ class App extends React.Component {
       <div className="main">
         <h1>App works</h1>
         <div>
-          <Nav searchMovieList={this.searchMovieList}/>
+          <Nav searchMovieList={this.searchMovieList} addMovie={this.addMovie}/>
         </div>
         <div>
           <MovieList movies={this.state.movies}/>

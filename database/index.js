@@ -17,6 +17,18 @@ var getAll = (callback) => {
       callback(null, results);
     }
   });
+}
+
+var insertMovie = (movieTitle, callback) => {
+  var queryString = 'INSERT INTO movies (title) VALUES (?)';
+  dbConnection.query(queryString, movieTitle, (error, results, fields) => {
+    if (error) {
+      callback(error, null);
+    } else {
+      callback(null, results);
+    }
+  });
 } 
 
 module.exports.getAll = getAll;
+module.exports.insertMovie = insertMovie;

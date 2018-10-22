@@ -10,7 +10,7 @@ console.log(path.join(__dirname, '../client/dist'));
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-app.use(parseBody.json());
+app.use(parseBody.text());
 
 app.get('/movies', (req, res) => {
   databaseMethods.getAll((error, results) => {
@@ -19,6 +19,16 @@ app.get('/movies', (req, res) => {
       res.status(500).send(error);
     } else {
       res.status(200).send(results);
+    }
+  });
+});
+
+app.post('/addMovie', (req, res) => {
+  databaseMethods.insertMovie(req.body, (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error);
+    } else {
+      res.status(201).end();
     }
   });
 });
