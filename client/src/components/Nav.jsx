@@ -22,12 +22,16 @@ class Nav extends React.Component {
     this.setState(newState);
   }
 
+  handleSubmit() {
+    console.log(this.state.addMovie);
+  }
+
   render() {
     return (
       <div>
         <input id="searchMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
         <input id="addMovie" type="text" onChange={this.handleInputChange.bind(this)}></input>
-        <button>addMovie</button>
+        <button onClick={this.handleSubmit.bind(this)}>addMovie</button>
       </div>
     )
   }
